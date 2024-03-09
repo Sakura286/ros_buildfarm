@@ -23,7 +23,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ))@
 
 
-RUN useradd -u @uid -l -m buildfarm
+RUN test getent passwd @uid || useradd -u @uid -l -m buildfarm
 
 @(TEMPLATE(
     'snippet/add_distribution_repositories.Dockerfile.em',
@@ -70,7 +70,7 @@ RUN . /etc/os-release && test "$VERSION_ID" = "20.04" && test "$(uname -m)" = "a
 RUN echo "@now_str"
 RUN python3 -u /tmp/wrapper_scripts/apt.py update
 
-USER buildfarm
+USER @uid
 ENTRYPOINT ["sh", "-c"]
 @{
 cmds = [

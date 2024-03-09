@@ -379,9 +379,6 @@ def check_https_github_com(url):
 
 
 def get_user_id():
-    # TODO parameterize it probably
-    return 1005
-
     uid = os.getuid()
     assert uid != 0, "You can not run this as user 'root'"
     return uid
