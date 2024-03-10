@@ -18,7 +18,10 @@ ENV DEBIAN_FRONTEND noninteractive
     timezone=timezone,
 ))@
 
-RUN useradd -u @uid -l -m buildfarm
+@(TEMPLATE(
+    'snippet/ensure_user_exists.Dockerfile.em',
+    uid=uid,
+))@
 
 @(TEMPLATE(
     'snippet/add_distribution_repositories.Dockerfile.em',
@@ -49,7 +52,7 @@ RUN python3 -u /tmp/wrapper_scripts/apt.py update-install-clean -q -y git python
 RUN echo "@now_str"
 RUN python3 -u /tmp/wrapper_scripts/apt.py update
 
-USER buildfarm
+USER @uid
 
 @[for repos_file in repos_file_names]@
 COPY @repos_file /tmp/@repos_file

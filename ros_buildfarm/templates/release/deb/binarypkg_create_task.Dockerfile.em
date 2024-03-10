@@ -23,7 +23,10 @@ ENV DEBIAN_FRONTEND noninteractive
 ))@
 
 
-RUN test getent passwd @uid || useradd -u @uid -l -m buildfarm
+@(TEMPLATE(
+    'snippet/ensure_user_exists.Dockerfile.em',
+    uid=uid,
+))@
 
 @(TEMPLATE(
     'snippet/add_distribution_repositories.Dockerfile.em',

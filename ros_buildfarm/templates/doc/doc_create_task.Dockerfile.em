@@ -11,7 +11,10 @@ ENV DEBIAN_FRONTEND noninteractive
     timezone=timezone,
 ))@
 
-RUN useradd -u @uid -l -m buildfarm
+@(TEMPLATE(
+    'snippet/ensure_user_exists.Dockerfile.em',
+    uid=uid,
+))@
 
 @(TEMPLATE(
     'snippet/add_distribution_repositories.Dockerfile.em',
@@ -49,7 +52,7 @@ ENV ROSDISTRO_INDEX_URL @rosdistro_index_url
     custom_rosdep_urls=custom_rosdep_urls,
 ))@
 
-USER buildfarm
+USER @uid
 
 ENTRYPOINT ["sh", "-c"]
 @{

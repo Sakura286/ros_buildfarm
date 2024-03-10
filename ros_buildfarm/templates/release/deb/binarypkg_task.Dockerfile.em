@@ -23,7 +23,10 @@ ENV DEBIAN_FRONTEND noninteractive
     timezone=timezone,
 ))@
 
-RUN useradd -u @uid -l -m buildfarm
+@(TEMPLATE(
+    'snippet/ensure_user_exists.Dockerfile.em',
+    uid=uid,
+))@
 
 @(TEMPLATE(
     'snippet/add_distribution_repositories.Dockerfile.em',
@@ -88,7 +91,7 @@ RUN . /etc/os-release && test "$VERSION_ID" = "20.04" && test "$(uname -m)" = "a
     install_lists=install_lists,
 ))@
 
-USER buildfarm
+USER @uid
 ENTRYPOINT ["sh", "-c"]
 @{
 cmd = \

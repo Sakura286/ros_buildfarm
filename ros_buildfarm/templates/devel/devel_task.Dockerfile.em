@@ -24,7 +24,10 @@ ENV DEBIAN_FRONTEND noninteractive
     timezone=timezone,
 ))@
 
-RUN useradd -u @uid -l -m buildfarm
+@(TEMPLATE(
+    'snippet/ensure_user_exists.Dockerfile.em',
+    uid=uid,
+))@
 
 @(TEMPLATE(
     'snippet/setup_nvidia_docker2.Dockerfile.em'
@@ -113,7 +116,7 @@ RUN pip3 install -U auto_abi_checker
 # TODO(nuclearsandwich) add link to Debian bug report when one is opened.
 RUN which update-ccache-symlinks >/dev/null 2>&1 && update-ccache-symlinks
 
-USER buildfarm
+USER @uid
 ENTRYPOINT ["sh", "-c"]
 @{
 cmd = \

@@ -28,7 +28,10 @@ ENV DEBIAN_FRONTEND noninteractive
     timezone=timezone,
 ))@
 
-RUN useradd -u @uid -l -m buildfarm
+@(TEMPLATE(
+    'snippet/ensure_user_exists.Dockerfile.em',
+    uid=uid,
+))@
 
 @(TEMPLATE(
     'snippet/add_distribution_repositories.Dockerfile.em',
@@ -88,7 +91,7 @@ RUN python3 -u /tmp/wrapper_scripts/apt.py update
 COPY @repos_file /tmp/@repos_file
 @[end for]@
 
-USER buildfarm
+USER @uid
 ENTRYPOINT ["sh", "-c"]
 @{
 install_paths = [os.path.join(root, 'install_isolated') for root in workspace_root[0:-1]]

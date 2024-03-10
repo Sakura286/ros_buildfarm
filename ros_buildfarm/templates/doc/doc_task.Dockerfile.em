@@ -22,7 +22,10 @@ ENV DEBIAN_FRONTEND noninteractive
     timezone=timezone,
 ))@
 
-RUN useradd -u @uid -l -m buildfarm
+@(TEMPLATE(
+    'snippet/ensure_user_exists.Dockerfile.em',
+    uid=uid,
+))@
 
 @(TEMPLATE(
     'snippet/set_environment_variables.Dockerfile.em',
@@ -86,7 +89,7 @@ RUN dpkg -i /tmp/doxygen_1.7.6.1-2ubuntu1_amd64.deb
 RUN doxygen --version
 @[end if]@
 
-USER buildfarm
+USER @uid
 ENTRYPOINT ["sh", "-c"]
 @{
 # empy fails using rosdoc_config_files in a list comprehension
