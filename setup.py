@@ -24,7 +24,7 @@ kwargs = {
     # same version as in:
     # - ros_buildfarm/__init__.py
     # - stdeb.cfg
-    'version': '3.0.1-master',
+    'version': '3.0.1',
     'packages': find_packages(exclude=['test']),
     'scripts': scripts,
     'include_package_data': True,
@@ -48,11 +48,11 @@ kwargs = {
     'maintainer': 'ROS Infrastructure Team',
     'project_urls': {
         'Source code':
-        'https://github.com/ros-infrastructure/ros_buildfarm',
+        'https://github.com/Sakura286/ros_buildfarm',
         'Issue tracker':
-        'https://github.com/ros-infrastructure/ros_buildfarm/issues',
+        'https://github.com/Sakura286/ros_buildfarm/issues',
     },
-    'url': 'https://github.com/ros-infrastructure/ros_buildfarm',
+    'url': 'https://github.com/Sakura286/ros_buildfarm',
     'keywords': ['ROS', 'buildfarm', 'catkin'],
     'classifiers': [
         'Programming Language :: Python',
