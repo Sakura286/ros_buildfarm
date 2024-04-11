@@ -199,7 +199,7 @@ class DocBuildFile(BuildFile):
         # an upload_host of 'repo', which is valid for the publish-over-ssh
         # configuration.
         if self.upload_host is None and self.upload_repository_url is None:
-            self.upload_host = 'repo'
+            self.upload_host = 'jenkins-agent'
 
         # Ensure that we have one, and only one, place to upload to
         assert (self.upload_host is not None) ^ (self.upload_repository_url is not None)

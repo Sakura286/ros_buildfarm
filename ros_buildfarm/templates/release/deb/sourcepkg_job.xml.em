@@ -138,7 +138,7 @@ but disabled since the package is blacklisted (or not whitelisted) in the config
 ))@
 @(SNIPPET(
     'builder_publish-over-ssh',
-    config_name='repo',
+    config_name='jenkins-agent',
     remote_directory='%s/${JOB_NAME}__${BUILD_NUMBER}' % os_code_name,
     source_files=sourcedeb_files,
     remove_prefix='sourcedeb',
